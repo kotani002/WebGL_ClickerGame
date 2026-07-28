@@ -15,4 +15,48 @@ public class ShopLogic : MonoBehaviour
         ClickData.instance.ScoreIncrease += 1;
         ClickData.instance.Score -= 10;
     }
+
+    public void AddGranm()
+    {
+        if(ClickData.instance.Score < 100)
+        {
+            // 処理を中断する
+            return;
+        }
+
+        if(ClickData.instance.GranmaBuyFlag == false)
+        ClickData.instance.GranmaBuyFlag = true;
+
+        ClickData.instance.GranmaBuyCount += 1;
+        ClickData.instance.Score -= 100;
+    }
+
+    // やりたいこと：30秒に1回 自動クリックが実行される
+    // private float型 変数名：ElapsedTime
+    private float ElapsedTime;
+
+    private void Update()
+    {
+        // 課題：Updateの処理を ばあちゃんを買った後にしか動かさないようにする
+
+        // 4.ばあちゃん買うボタンを追加する
+        // EX.ばあちゃんを買った数*スコア分 スコアを加算する
+        // EX2.ばあちゃんの待機時間を変数にする
+
+        if(ClickData.instance.GranmaBuyFlag == false)
+        {
+            return;
+        }
+
+        // deltaTime : 前回のFrameからどのくらい時間が経過したか
+        ElapsedTime += Time.deltaTime;
+
+        // もしもElapsedTimeが3秒以上だったら
+        if(ElapsedTime >= 3)
+        {
+            // スコアに＋１をする
+            ClickData.instance.Score += 1 * ClickData.instance.GranmaBuyCount;
+            ElapsedTime -= 3;
+        }
+    }
 }

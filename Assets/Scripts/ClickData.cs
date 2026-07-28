@@ -18,4 +18,8 @@ public class ClickData : MonoBehaviour
     // クリッカーゲームに必要な変数
     public int Score = 0;
     public int ScoreIncrease = 1;
+    
+    // Shop関連のデータ
+    public bool GranmaBuyFlag = false;
+    public int GranmaBuyCount = 0;
 }
